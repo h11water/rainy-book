@@ -1,0 +1,18 @@
+html {
+  overflow: hidden;
+  height: 100%;
+  position: fixed;
+}
+
+body {
+  width: 100vw;
+
+  overflow-y: hidden;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+
+}

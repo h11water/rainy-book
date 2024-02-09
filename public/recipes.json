@@ -1,0 +1,119 @@
+{
+    "recipes": [
+        {
+            "id": 1,
+            "name": "extreme lasagna",
+            "description": "owowowowoowowowowowo",
+            "dateCreated": "01/02/2024",
+            "dateModified": "03/02/2024",
+            "ingredients":[
+            ],
+            "sections":[
+                {
+                    "header" : "step 1",
+                    "type": "text",
+                    "content": "hello world",
+                    "sectionOrder": 0
+                },
+                {
+                    "header" : "step 2",
+                    "type": "text",
+                    "content": "mine lasagna from the ground",
+                    "sectionOrder": 1
+                },
+                {
+                    "header" : "step 3",
+                    "type": "text",
+                    "content": "wash lasagna with warm water ",
+                    "sectionOrder": 2
+                },
+                {
+                    "header" : "step 4",
+                    "type": "text",
+                    "content": "put lasagna in crucible",
+                    "sectionOrder": 3
+                },
+                {
+                    "header" : "step 5",
+                    "type": "text",
+                    "content": "wait until lasagna is melted",
+                    "sectionOrder": 4
+                },
+                {
+                    "header" : "step 6",
+                    "type": "text",
+                    "content": "pour lasanga into mould",
+                    "sectionOrder": 5
+                },
+                {
+                    "header" : "step 7",
+                    "type": "text",
+                    "content": "pour lasanga into mould",
+                    "sectionOrder": 6
+                },
+                {
+                    "header" : "step 8",
+                    "type": "text",
+                    "content": "pour lasanga into mould",
+                    "sectionOrder": 7
+                },
+                {
+                    "header" : "step 8",
+                    "type": "text",
+                    "content": "pour lasanga into mould",
+                    "sectionOrder": 7
+                },
+                {
+                    "header" : "step 9",
+                    "type": "text",
+                    "content": "pour lasanga into mould",
+                    "sectionOrder": 8
+                }
+            ],
+            "mainImage":"./images/placeHolder.jpg"
+        },
+        {
+            "id": 2,
+            "name": "rainbow trout",
+            "description": "owowowowoowowowowowo",
+            "dateCreated": "01/02/2024",
+            "dateModified": "03/02/2024",
+            "ingredients":[],
+            "sections":[],
+            "mainImage":"./images/placeHolder2.jpg"
+        },
+        {
+            "id": 3,
+            "name": "lasagna",
+            "description": "owowowowoowowowowowo",
+            "dateCreated": "01/02/2024",
+            "dateModified": "03/02/2024",
+            "ingredients":[],
+            "sections":[],
+            "mainImage":"./images/placeHolder3.jpg"
+        },
+        {
+            "id": 4,
+            "name": "ice cream",
+            "description": "owowowowoowowowowowo",
+            "dateCreated": "01/02/2024",
+            "dateModified": "03/02/2024",
+            "ingredients":[],
+            "sections":[],
+            "mainImage":"./images/placeHolder1.jpg"
+        },
+        {
+            "id": 5,
+            "name": "dim sum",
+            "description": "owowowowoowowowowowo",
+            "dateCreated": "09/02/2024"
+        },
+        {
+            "id": 6,
+            "name": "rice",
+            "description": "owowowowoowowowowowo",
+            "dateCreated": "01/02/2024"
+        }
+    ],
+    "version": 10
+}
