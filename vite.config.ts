@@ -17,4 +17,7 @@ export default defineConfig({
   server: {
     port: 60533,
   },
+  build:{
+    outDir: '/rainy-book/'+'/public',
+  }
 })

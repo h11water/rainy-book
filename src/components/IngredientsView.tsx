@@ -14,7 +14,7 @@ export default function IngredientsView() {
                 <br></br>
                 <hr className="border-slate-800"></hr>
                 <div>
-                    <img className=" inline" src="../images/bootstrapIcons/plus.svg" />
+                    <img className=" inline" src="./images/bootstrapIcons/plus.svg" />
                     <div className="inline">Add ingredient</div>
                 </div>
 
@@ -38,7 +38,7 @@ export default function IngredientsView() {
                     </div>
 
                     <div className="flex-1 m-1">
-                        <button> <img className="bg-emerald-400 p-1 rounded-full" src="../images/bootstrapIcons/plus.svg" /></button>
+                        <button> <img className="bg-emerald-400 p-1 rounded-full" src="./images/bootstrapIcons/plus.svg" /></button>
                     </div>
 
                 </div>

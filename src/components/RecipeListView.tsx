@@ -22,7 +22,7 @@ export default function RecipesList() {
           <div className="m-1 text-xl font-medium inline">My Recipes</div>
           <div className='mt-2 p-4 float-right hover:bg-sky-500 rounded' onClick={e=>{recipesManager.showRecipesList()}}>
             <span className=''>
-              <img src="../images/bootstrapIcons/arrow-bar-left.svg" />
+              <img src="./images/bootstrapIcons/arrow-bar-left.svg" />
             </span>
           </div>
         </div>
@@ -43,10 +43,10 @@ export default function RecipesList() {
               recipesManager.showRecipesList()
             }
           }} title='Settings'>
-            <img src="../images/bootstrapIcons/gear.svg" />
+            <img src="./images/bootstrapIcons/gear.svg" />
           </span>
           <span className='rounded hover:bg-sky-500 p-2 mt-2 ml-auto' onClick={() => { recipesManager.showNewRecipeView() }} title='New document'>
-            <img src="../images/bootstrapIcons/plus.svg" />
+            <img src="./images/bootstrapIcons/plus.svg" />
           </span>
 
         </div>
