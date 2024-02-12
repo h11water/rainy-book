@@ -15,6 +15,7 @@ type RecipesManager = {
   showNewRecipeView: Function
   addNewSectionTo: Function
   editSection: Function
+  deleteSection: Function
   deleteDocument: Function
 }
 
@@ -150,9 +151,25 @@ let recipesManager: RecipesManager = {
     });
     this.saveRecipesToLocalStorage();
   },
-  deleteDocument: function(documentId: string){
-    this.setStateFunctions.setRecipesList((prev:Recipe[])=>{
-      return prev.filter(r=>r.id !== documentId);
+  deleteSection(recipe: Recipe, sectionIndex: number) {
+    this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
+      if (sectionIndex > -1) {
+        console.log("delete",  sectionIndex)
+        recipe.sections.splice(sectionIndex, 1);
+      }
+      //replace recipe with new recipe
+      prev = prev.filter(r => r.id !== recipe.id);
+      prev = [recipe, ...prev];
+      return prev;
+    });
+    this.setStateFunctions.setSelectedRecipe((prev: Recipe) => {
+      return JSON.parse(JSON.stringify(recipe));
+    });
+    this.saveRecipesToLocalStorage();
+  },
+  deleteDocument: function (documentId: string) {
+    this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
+      return prev.filter(r => r.id !== documentId);
     })
     this.saveRecipesToLocalStorage();
   }

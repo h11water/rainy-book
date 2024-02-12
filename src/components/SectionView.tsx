@@ -42,6 +42,10 @@ export default function SectionView({ ...props }) {
         recipesManager.editSection(props.selectedRecipe, props.sectionOrder, editedSection)
     }
 
+    function handleDelete(){
+        recipesManager.deleteSection(props.selectedRecipe,props.sectionOrder)
+    }
+
     return (
         <div className="h-full">
 
@@ -65,7 +69,7 @@ export default function SectionView({ ...props }) {
                         <Editor sectionOrder={props.sectionOrder} initialContent={props.section.lexiContent} recipe={props.selectedRecipe} onChangeFn={saveLexiSection} />
                     </div>
                     <div className={isShowingOptions ? "flex-1 ml-auto opacity-1" : "flex-1 ml-auto opacity-0"} >
-                        <button className="btn btn-sky">
+                        <button className="btn btn-sky" onClick={handleDelete}>
                             <span>
                                 <img src="images/bootstrapIcons/x-lg.svg"></img>
                             </span>
