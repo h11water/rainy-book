@@ -22,7 +22,7 @@ export default function MainViewContainer() {
 
         let lastSelectedRecipe = recipesManager.recipesList.find((r:Recipe) => r.id == localStorage.getItem("lastSelected"))
         setSelectedRecipe(lastSelectedRecipe);
-        /*
+        /**/
         recipesManager.setStateFunctions.setRecipesList((recipesList: Recipe[]) => {
             let lastSelectedRecipe: any = recipesList.find(r => r.id == localStorage.getItem("lastSelected"))
             if (lastSelectedRecipe) {
@@ -31,7 +31,7 @@ export default function MainViewContainer() {
             }
             return recipesList;
         })
-        */
+        
     }, [])
 
     useEffect(() => {
@@ -41,7 +41,8 @@ export default function MainViewContainer() {
         <div className="flex-3 rounded-xl bg-slate-50 m-1 shadow border border-slate-400 w-64 p-2 overflow-hidden flex-col flex">
             <Modal></Modal>
             <HeadrBar HeaderContent={selectedRecipe?.name}></HeadrBar>
-            <button className="btn btn-sky" onClick={() => {
+            <div className="flex">
+            <button className="btn btn-sky flex-1" onClick={() => {
                 setSelectedRecipe((r) => {
                     console.log(selectedRecipe); 
                     //this.forceUpdate()
@@ -52,6 +53,9 @@ export default function MainViewContainer() {
             }}>
                 change state
             </button>
+            <button className="btn btn-sky flex-1"> show modal</button>
+            </div>
+
             
             {
                 viewingType === ViewType.noRecipe && <NoRecipe></NoRecipe>

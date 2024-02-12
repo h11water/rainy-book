@@ -16,7 +16,7 @@ export default function RecipeView({ ...props }) {
     <div className='overflow-x-scroll w-full'>
 
       {/* change the key so the full component refreshes and the animation gets replayed*/}
-      <div className="fade-in overflow-auto" key={selectedRecipe.id}>
+      <div className="fade-in overflow-y-auto overflow-x-hidden" key={selectedRecipe.id}>
         <button className="btn btn-sky" onClick={() => {
           setGridColumns(prev => {
             console.log(prev)
@@ -26,7 +26,7 @@ export default function RecipeView({ ...props }) {
 
 
 
-        <div className="w-full grid" style={{ "gridTemplateColumns": "repeat(" + String(gridColumns) + ", minmax(0, 1fr))" }}>
+        <div className="grid" style={{ "gridTemplateColumns": "repeat(" + String(gridColumns) + ", minmax(0, 1fr))" }}>
           {/* 
           <img className="rounded center" src={selectedRecipe.mainImage}></img>
           */}

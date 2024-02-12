@@ -3,7 +3,7 @@ import recipesManager from "../functions/recipesManager";
 
 export default function SectionAdder({ ...props }) {
     return (
-        <button className="btn btn-green w-full" onClick={() => {
+        <button className="btn btn-green w-full !mt-5" onClick={() => {
             recipesManager.addNewSectionTo(props.selectedRecipe)
 
         }}>
