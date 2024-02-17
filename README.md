@@ -1,6 +1,6 @@
 # Rainy book
 
-This is a web app to write notes. 
+This is a web app to write notes. Use at https://h11water.github.io/rainy-book/
 
 ## Features
 - save notes to local storage
