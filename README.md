@@ -1,5 +1,14 @@
-# React + TypeScript + Vite
+# Rainy book
 
+This is a web app to write notes. 
+
+## Features
+- save notes to local storage
+- ability to add the app to home screen/ install as PWA
+- (WIP) select note templates: blank, diary, instructions
+- (WIP) 
+
+<!--
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
@@ -28,3 +37,5 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+-->
