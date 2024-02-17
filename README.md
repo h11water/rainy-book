@@ -6,8 +6,13 @@ This is a web app to write notes. Use at https://h11water.github.io/rainy-book/
 - save notes to local storage
 - ability to add the app to home screen/ install as PWA
 - (WIP) select note templates: blank, diary, instructions
-- (WIP) 
 
+## Run at local host
+1. install nodejs
+2. git clone project
+3. cd to cloned project
+4. run "npm install"
+5. run "npm run dev"
 <!--
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
