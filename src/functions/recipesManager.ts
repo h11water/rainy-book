@@ -91,7 +91,7 @@ let recipesManager: RecipesManager = {
     return 0;
   },
   showRecipesList: function () {
-    let a = document.getElementById("recipe-list-view");
+    let a = document.getElementById("recipe-list-container");
 
     if (a === null) return;
 

@@ -11,6 +11,7 @@ export default function SectionView({ ...props }) {
     //const [editingTitle, setEditingTitle] = useState(false);
     //const [editingContent, setEditingContent] = useState(false);
     const [isShowingOptions, setIsShowingOptions] = useState(false)
+    console.log("rerendered", props.selectedRecipe)
 
     function handleKeyPress(event: any) {
         // This is perfectly safe in react, it correctly detect the keys
@@ -49,7 +50,7 @@ export default function SectionView({ ...props }) {
     return (
         <div className="h-full">
 
-            <div className="border border-slate-400 mt-2 p-1 h-full" onMouseOver={() => setIsShowingOptions(true)} onMouseLeave={() => setIsShowingOptions(false)}>
+            <div className="border border-slate-400 mt-2 p-1 h-full" onMouseOver={() => {setIsShowingOptions(true)}} onMouseLeave={() => {setIsShowingOptions(false)}}>
                 {/*
                 <EditableContent initialContent={props.section.header} className="h1 block text-slate-400" onInputFn={(e:any)=>{saveSection(e, "header")}}></EditableContent>
                 <div className="pl-1 flex">
