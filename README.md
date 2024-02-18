@@ -4,10 +4,11 @@ This is a web app to write notes. Use at https://h11water.github.io/rainy-book/
 
 ## Features
 - save notes to local storage
-- ability to add the app to home screen/ install as PWA
+- ability to add the app to home screen/ install as PWA on your phone
 - (WIP) select note templates: blank, diary, instructions
+- (WIP) draw with mouse cursor
 
-## Run at local host
+## Run locally
 1. install nodejs
 2. git clone project
 3. cd to cloned project
