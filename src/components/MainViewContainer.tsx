@@ -12,15 +12,16 @@ import Modal from "./Modal";
 import modalManager from "../functions/modalManager";
 
 export default function MainViewContainer() {
-    const [selectedRecipe, setSelectedRecipe] = React.useState<Recipe>();
+    const [selectedRecipe, setSelectedRecipe] = React.useState<Recipe | undefined>();
     const [viewingType, setViewingType] = React.useState<ViewType>(ViewType.noRecipe);
     // use effect will be called if the 2nd param
     // in this case [], changes. [] does not change
     // so it is called at initialisation
     useEffect(() => {
+        //console.log(import.meta.env.test1,import.meta.env.VITE_ala)
         recipesManager.setStateFunctions.setSelectedRecipe = setSelectedRecipe;
         recipesManager.setStateFunctions.setViewingType = setViewingType;
-
+        return
         let lastSelectedRecipe = recipesManager.recipesList.find((r: Recipe) => r.id == localStorage.getItem("lastSelected"))
         setSelectedRecipe(lastSelectedRecipe);
         /**/

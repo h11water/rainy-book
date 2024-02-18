@@ -11,7 +11,7 @@ export default function SectionView({ ...props }) {
     //const [editingTitle, setEditingTitle] = useState(false);
     //const [editingContent, setEditingContent] = useState(false);
     const [isShowingOptions, setIsShowingOptions] = useState(false)
-    console.log("rerendered", props.selectedRecipe)
+    //console.log("rerendered", props.selectedRecipe)
 
     function handleKeyPress(event: any) {
         // This is perfectly safe in react, it correctly detect the keys
@@ -36,7 +36,7 @@ export default function SectionView({ ...props }) {
     function saveLexiSection(lexiState: EditorState) {
         //console.log("saved lexi", lexiState)
 
-        let editedSection = props.selectedRecipe.sections[props.sectionOrder];
+        let editedSection = props.selectedRecipe.sections.find((s:Section)=>s.sectionOrder = props.sectionOrder);
         editedSection.lexiContent = lexiState;
 
         props.selectedRecipe.sections[props.sectionOrder]

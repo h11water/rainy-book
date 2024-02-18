@@ -11,7 +11,7 @@ export type Recipe = {
     mainImage:string
 }
 
-export enum SocumentType{
+export enum DocumentType{
     blank,
     log,
     instruction,
@@ -19,7 +19,7 @@ export enum SocumentType{
 }
 
 export type Section = {
-    sectionOrder: number
+    sectionOrder: number | string
     header: string
     type: SectionType
     content: string

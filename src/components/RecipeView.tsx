@@ -7,10 +7,19 @@ import { useState } from "react";
 import DrawingCanvas from "./DrawingCanvas";
 
 export default function RecipeView({ ...props }) {
+  var selectedRecipe: Recipe
+  try {
+    selectedRecipe = props.recipe;
+    //this code will give undefined access error if sections does not exist
+    selectedRecipe.sections.map
+  } catch {
+    //console.log("not a recipe type")
+    return (<div>failed to load document</div>)
+  }
 
-  let selectedRecipe: Recipe = props.recipe;
   let [gridColumns, setGridColumns] = useState<number>(1);
   if (!selectedRecipe) return <div> no recipe</div>
+
 
   return (
     <div className='overflow-x-scroll w-full'>
@@ -37,8 +46,8 @@ export default function RecipeView({ ...props }) {
             selectedRecipe.sections.map((s: Section, i: number) => {
 
               if (s.type === SectionType.text) return <SectionView key={i} section={s} selectedRecipe={selectedRecipe} sectionOrder={s.sectionOrder}></SectionView>
-              if (s.type === SectionType.drawing) return <DrawingCanvas />
-              if (s.type === SectionType.photo) return <DrawingCanvas />
+              if (s.type === SectionType.drawing) return <DrawingCanvas key={i} section={s}/>
+              if (s.type === SectionType.photo) return <DrawingCanvas key={i} section={s}/>
             })
           }
           <SectionAdder selectedRecipe={selectedRecipe} setRecipe={props.setRecipe}></SectionAdder>

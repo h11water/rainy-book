@@ -1,6 +1,7 @@
 import RecipesList from "../components/RecipeListView";
 import { Recipe, Section } from "../types/Recipe"
 import { ViewType } from "../types/ViewType";
+import { v4 as uuidv4 } from 'uuid';
 
 type RecipesManager = {
   selectedRecipe: Recipe | undefined
@@ -110,19 +111,20 @@ let recipesManager: RecipesManager = {
       this.showRecipesList();
     }
   },
-  addNewSectionTo: function (recipe: Recipe) {
-
+  addNewSectionTo: function (recipe: Recipe, a:any) {
+    console.log(a)
     recipe.sections.push(
       {
-        sectionOrder: recipe.sections.length,
+        sectionOrder: uuidv4(),
         header: "title" + recipe.sections.length,
-        type: 0,
+        type: a,
         content: "text",
         lexiContent: undefined
       }
     );
 
     this.setStateFunctions.setSelectedRecipe((prev: Recipe) => {
+      
       //must return a clone because otherwise
       //object.is will detect the object as the same
       //so no changes will render
@@ -138,7 +140,7 @@ let recipesManager: RecipesManager = {
       return prev;
     });
     this.saveRecipesToLocalStorage();
-
+    return
   },
   editSection: function (recipe: Recipe, sectionIndex: number, newSection: Section) {
 
