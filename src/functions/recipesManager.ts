@@ -111,8 +111,8 @@ let recipesManager: RecipesManager = {
       this.showRecipesList();
     }
   },
-  addNewSectionTo: function (recipe: Recipe, a:any) {
-    console.log(a)
+  addNewSectionTo: function (recipe: Recipe, a: any) {
+
     recipe.sections.push(
       {
         sectionOrder: uuidv4(),
@@ -124,7 +124,7 @@ let recipesManager: RecipesManager = {
     );
 
     this.setStateFunctions.setSelectedRecipe((prev: Recipe) => {
-      
+
       //must return a clone because otherwise
       //object.is will detect the object as the same
       //so no changes will render
@@ -136,44 +136,56 @@ let recipesManager: RecipesManager = {
       //replace recipe with new recipe
       prev = prev.filter(r => r.id !== recipe.id);
       prev = [recipe, ...prev];
-      console.log(prev);
       return prev;
     });
     this.saveRecipesToLocalStorage();
     return
   },
-  editSection: function (recipe: Recipe, sectionIndex: number, newSection: Section) {
+  editSection: function (recipe: Recipe, sectionId: string, newSection: Section) {
 
     this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
-      recipe.sections[sectionIndex] = newSection;
-      //replace recipe with new recipe
-      prev = prev.filter(r => r.id !== recipe.id);
-      prev = [recipe, ...prev];
+      let editedRecipe = prev.find(p => p.id === recipe.id)
+      if (!editedRecipe) return prev;
+      // get index of edited recipe
+      let i = prev.indexOf(editedRecipe);
+
+      let editedSection = prev[i].sections.find(s => s.sectionOrder === sectionId)
+      if (!editedSection) return prev;
+      // get index of the section
+      let index = prev[i].sections.indexOf(editedSection)
+      // place the edited section of the edited recipe with new section
+      prev[i].sections[index] = newSection;
+
       return prev;
-    });
-    this.saveRecipesToLocalStorage();
-  },
-  deleteSection(recipe: Recipe, sectionIndex: number) {
-    this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
-      if (sectionIndex > -1) {
-        console.log("delete",  sectionIndex)
-        recipe.sections.splice(sectionIndex, 1);
-      }
-      //replace recipe with new recipe
-      prev = prev.filter(r => r.id !== recipe.id);
-      prev = [recipe, ...prev];
-      return prev;
-    });
-    this.setStateFunctions.setSelectedRecipe((prev: Recipe) => {
-      return JSON.parse(JSON.stringify(recipe));
-    });
-    this.saveRecipesToLocalStorage();
-  },
-  deleteDocument: function (documentId: string) {
-    this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
-      return prev.filter(r => r.id !== documentId);
     })
     this.saveRecipesToLocalStorage();
+    return;
+  },
+  deleteSection(recipe: Recipe, sectionId: string) {
+    console.log(JSON.parse(JSON.stringify(recipe)))
+    this.setStateFunctions.setSelectedRecipe((prev: Recipe) => {
+      let sectionToDelete = prev.sections.find(section => section.sectionOrder === sectionId)
+
+      // if section does not exist
+      if (!sectionToDelete) return;
+
+      let index = prev.sections.indexOf(sectionToDelete);
+
+      // remove the section
+      recipe.sections.splice(index, 1);
+
+      return JSON.parse(JSON.stringify(prev))
+    })
+    this.saveRecipesToLocalStorage();
+  },
+  deleteDocument: function (documentId: string, event: any) {
+    // stop click event propogating to parent
+    event.stopPropagation();
+    this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
+      this.setStateFunctions.setViewingType(ViewType.noRecipe)
+      return prev.filter(r => r.id !== documentId);
+    })
+    this.saveRecipesToLocalStorage()
   }
 }
 

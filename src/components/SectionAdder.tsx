@@ -15,13 +15,13 @@ export default function SectionAdder({ ...props }) {
 
             <div className="relative text-center">
 
-                <button className="flex-1 hover:bg-slate-300 rounded m-2 text-center p1" title="add image" onClick={()=>{console.log("aaaa");recipesManager.addNewSectionTo(props.selectedRecipe, SectionType.text)}}>
+                <button className="flex-1 hover:bg-slate-300 rounded m-2 text-center p1" title="add image" onClick={()=>{recipesManager.addNewSectionTo(props.selectedRecipe, SectionType.text)}}>
                     <span className='text-center'>
                         <img className="w-8" src="./images/bootstrapIcons/fonts.svg" />
                     </span>
                 </button>
 
-                <button className="flex-1 hover:bg-slate-300 rounded m-2 text-center p-1" title="add image" onClick={()=>{console.log("aaaa");recipesManager.addNewSectionTo(props.selectedRecipe, SectionType.drawing)}}>
+                <button className="flex-1 hover:bg-slate-300 rounded m-2 text-center p-1" title="add image" onClick={()=>{recipesManager.addNewSectionTo(props.selectedRecipe, SectionType.drawing)}}>
                     <span className='text-center'>
                         <img className="w-8" src="./images/bootstrapIcons/image.svg" />
                     </span>

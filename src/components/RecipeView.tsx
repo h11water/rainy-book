@@ -45,9 +45,7 @@ export default function RecipeView({ ...props }) {
           {
             selectedRecipe.sections.map((s: Section, i: number) => {
 
-              if (s.type === SectionType.text) return <SectionView key={i} section={s} selectedRecipe={selectedRecipe} sectionOrder={s.sectionOrder}></SectionView>
-              if (s.type === SectionType.drawing) return <DrawingCanvas key={i} section={s}/>
-              if (s.type === SectionType.photo) return <DrawingCanvas key={i} section={s}/>
+              return <SectionView key={i} section={s} selectedRecipe={selectedRecipe} sectionOrder={s.sectionOrder} sectionType={s.type}></SectionView>
             })
           }
           <SectionAdder selectedRecipe={selectedRecipe} setRecipe={props.setRecipe}></SectionAdder>

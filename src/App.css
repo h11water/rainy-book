@@ -15,11 +15,19 @@
 }
 
 .flex-5 {
-  flex: 4
+  flex: 5
 }
 
 .flex-6 {
-  flex: 4
+  flex: 6
+}
+
+.flex-10{
+  flex:10
+}
+
+.flex-20{
+  flex:20
 }
 
 /* scroll bar */
@@ -94,6 +102,23 @@
   }
 }
 
+.fade-out-fast{
+  animation: fade-out 0.15s;
+}
+
+.fade-out{
+  animation: fade-out 0.35s;
+}
+
+@keyframes fade-out{
+  0%{
+    opacity: 100%;
+  }
+  100%{
+    opacity: 0%;
+  }
+}
+
 .safari-full{
   height: 100%;
   height: -webkit-fill-available;
@@ -120,7 +145,7 @@
 }
 
 .btn-sky{
-  @apply bg-sky-300 hover:bg-sky-500 active:bg-sky-600 
+  @apply bg-sky-500 hover:bg-sky-600 active:bg-sky-700 
   focus:ring-4 focus:ring-blue-300
   border
 }

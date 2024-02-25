@@ -1,15 +1,16 @@
 import * as React from "react"
 import { useEffect } from 'react'
 import recipesManager from "../functions/recipesManager"
-import { Recipe, Section } from "../types/Recipe";
+import { Recipe } from "../types/Recipe";
 import HeadrBar from "./HeaderBar";
 import { ViewType } from "../types/ViewType";
 import NoRecipe from "./NoRecipeView";
 import RecipeView from "./RecipeView";
 import NewRecipeView from "./NewRecipeView";
 import SettingsView from "./SettingsView";
-import Modal from "./Modal";
+import Modal from "./modal/Modal";
 import modalManager from "../functions/modalManager";
+
 
 export default function MainViewContainer() {
     const [selectedRecipe, setSelectedRecipe] = React.useState<Recipe | undefined>();
@@ -21,6 +22,8 @@ export default function MainViewContainer() {
         //console.log(import.meta.env.test1,import.meta.env.VITE_ala)
         recipesManager.setStateFunctions.setSelectedRecipe = setSelectedRecipe;
         recipesManager.setStateFunctions.setViewingType = setViewingType;
+
+
         return
         let lastSelectedRecipe = recipesManager.recipesList.find((r: Recipe) => r.id == localStorage.getItem("lastSelected"))
         setSelectedRecipe(lastSelectedRecipe);
@@ -46,8 +49,11 @@ export default function MainViewContainer() {
             <Modal></Modal>
             <HeadrBar HeaderContent={selectedRecipe?.name}></HeadrBar>
             <div className="flex">
+
+                <button onClick={()=>{recipesManager.setStateFunctions.setViewingType(ViewType.noRecipe)}}>test </button>
+
                 <button className="btn btn-sky flex-1" onClick={() => {
-                    setSelectedRecipe((r) => {
+                    setSelectedRecipe(() => {
                         console.log(selectedRecipe);
                         //this.forceUpdate()
                         //console.log(selectedRecipe, structuredClone(selectedRecipe))

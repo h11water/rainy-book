@@ -19,7 +19,7 @@ export default function RecipeListItem({ ...props }) {
             </div>
 
             {
-                isHovering && <button className="!mr-0 !ml-auto btn btn-sky" onClick={() => { recipesManager.deleteDocument(recipe.id) }}>
+                isHovering && <button className="!mr-0 !ml-auto btn btn-sky" onClick={(e) => { recipesManager.deleteDocument(recipe.id, e) }}>
                     <span>
                         <img src="images/bootstrapIcons/x-lg.svg"></img>
                     </span>

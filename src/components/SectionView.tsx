@@ -3,8 +3,9 @@ import { useState } from "react";
 import EditableContent from "./EditableContentView";
 import recipesManager from "../functions/recipesManager";
 import Editor from "./LexicalEditor";
-import { Section } from "../types/Recipe";
+import { Section, SectionType } from "../types/Recipe";
 import { EditorState } from "lexical";
+import DrawingCanvas from "./DrawingCanvas";
 
 
 export default function SectionView({ ...props }) {
@@ -36,21 +37,21 @@ export default function SectionView({ ...props }) {
     function saveLexiSection(lexiState: EditorState) {
         //console.log("saved lexi", lexiState)
 
-        let editedSection = props.selectedRecipe.sections.find((s:Section)=>s.sectionOrder = props.sectionOrder);
+        let editedSection = props.selectedRecipe.sections.find((s: Section) => s.sectionOrder === props.sectionOrder);
         editedSection.lexiContent = lexiState;
 
         props.selectedRecipe.sections[props.sectionOrder]
         recipesManager.editSection(props.selectedRecipe, props.sectionOrder, editedSection)
     }
 
-    function handleDelete(){
-        recipesManager.deleteSection(props.selectedRecipe,props.sectionOrder)
+    function handleDelete() {
+        recipesManager.deleteSection(props.selectedRecipe, props.sectionOrder)
     }
 
     return (
         <div className="h-full">
 
-            <div className="border border-slate-400 mt-2 p-1 h-full" onMouseOver={() => {setIsShowingOptions(true)}} onMouseLeave={() => {setIsShowingOptions(false)}}>
+            <div className="border border-slate-400 mt-2 p-1 h-full" onMouseOver={(e) => { setIsShowingOptions(true);e.stopPropagation();}} onMouseLeave={(e) => { setIsShowingOptions(false);e.stopPropagation() }}>
                 {/*
                 <EditableContent initialContent={props.section.header} className="h1 block text-slate-400" onInputFn={(e:any)=>{saveSection(e, "header")}}></EditableContent>
                 <div className="pl-1 flex">
@@ -66,9 +67,16 @@ export default function SectionView({ ...props }) {
                 </div>
                  */}
                 <div className="flex h-full">
-                    <div className="flex-3">
-                        <Editor sectionOrder={props.sectionOrder} initialContent={props.section.lexiContent} recipe={props.selectedRecipe} onChangeFn={saveLexiSection} />
+                    <div className="flex-3 overflow-auto">
+
+                    {
+                        props.sectionType === SectionType.text && <Editor sectionOrder={props.sectionOrder} initialContent={props.section.lexiContent} recipe={props.selectedRecipe} onChangeFn={saveLexiSection} />
+                    }
+                    {
+                        props.sectionType === SectionType.drawing && <DrawingCanvas section={props.section}></DrawingCanvas>
+                    }
                     </div>
+
                     <div className={isShowingOptions ? "flex-1 ml-auto opacity-1" : "flex-1 ml-auto opacity-0"} >
                         <button className="btn btn-sky" onClick={handleDelete}>
                             <span>

@@ -10,7 +10,7 @@ interface myProps{
 export default function DrawingCanvas({section}:myProps) {
 
     const canvasElem = React.createRef<HTMLCanvasElement>()
-    console.log(section)
+    //console.log(section)
     
 
     function handleOnClick(event: any) {
@@ -19,7 +19,7 @@ export default function DrawingCanvas({section}:myProps) {
         //console.log(canvasElem.current.getContext, canvasElem, canvasElem.current.getBoundingClientRect(), event)
 
         /* */
-        
+        return
         var ctx = event.target.getContext("2d");
         let temp = event.target.getBoundingClientRect()
         mouseRelativePos = [

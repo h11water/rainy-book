@@ -1,6 +1,14 @@
 import recipesManager from "../functions/recipesManager"
 import { useState } from "react"
+import modalManager from "../functions/modalManager"
+
 export default function HeadrBar({ ...props }) {
+
+
+    function openAboutDocument(event:any){
+        event.preventDefault()
+        modalManager.openModal(true)
+    }
 
     const [isShowingOptions, setIsShowingOptions] = useState(false)
 
@@ -14,19 +22,20 @@ export default function HeadrBar({ ...props }) {
             <div className="m-1 text-xl font-medium inline">{props.HeaderContent}</div>
 
             <div className="ml-auto flex flex-col items-end absolute right-2">
-                <button className="rounded  p-3 hover:bg-slate-300" onClick={() => { setIsShowingOptions((prev: boolean) => { return !prev }) }} title="options">
+                <button className="rounded  p-3 hover:bg-slate-300" onClick={e=>{openAboutDocument(e)}} title="options">
                     <span className=''>
                         <img src="./images/bootstrapIcons/three-dots-vertical.svg" />
                     </span>
                 </button>
 
-                {/*options 3 dot menu */}
+                {/*options 3 dot menu 
                 {
                     isShowingOptions &&
-                    <div className="fade-in">
+                    <div className="">
                         <div className="bg-slate-200 shadow-xl border border-slate-400 m-1 p-1 rounded-lg -z-100">
                             <div className="flex flex-col">
-                                <button className="btn btn-slate block text-left">
+                                <button className="btn btn-slate block text-left"
+                                onClick={e=>{openAboutDocument(e)}}>
                                     About
                                 </button>
                                 <button className="btn btn-slate block text-left">
@@ -41,6 +50,7 @@ export default function HeadrBar({ ...props }) {
                     </div>
 
                 }
+                */}
 
             </div>
 
