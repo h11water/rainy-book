@@ -1,5 +1,5 @@
-import recipesManager from "../functions/recipesManager"
-import { Recipe } from "../types/Recipe"
+import documentManager from "../functions/documentManager"
+import { Recipe } from "../types/Document"
 import { v4 as uuidv4 } from 'uuid';
 
 export default function NewRecipeView() {
@@ -20,8 +20,8 @@ export default function NewRecipeView() {
         newRecipe.id = uuidv4()
         newRecipe.name = e.target.elements["doc-name"].value
 
-        recipesManager.addRecipe(newRecipe)
-        recipesManager.selectRecipe(newRecipe)
+        documentManager.addDocument(newRecipe)
+        documentManager.selectDocument(newRecipe)
         return newRecipe
     }
 

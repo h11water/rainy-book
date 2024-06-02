@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Section } from "../types/Recipe";
+import { Section } from "../types/Document";
 
 let mouseRelativePos = [0, 0];
 

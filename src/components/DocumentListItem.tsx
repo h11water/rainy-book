@@ -1,7 +1,9 @@
 //import Recipe from "../types/Recipe"
 import { useState } from "react";
-import recipesManager from "../functions/recipesManager";
-import { Recipe } from "../types/Recipe";
+import documentManager from "../functions/documentManager";
+import { Recipe } from "../types/Document";
+import modalManager from "../functions/modalManager";
+import { ModalContentType } from "./modal/Modal";
 
 export default function RecipeListItem({ ...props }) {
     let recipe: Recipe = props.recipe;
@@ -9,7 +11,9 @@ export default function RecipeListItem({ ...props }) {
 
     return (
         <div className="flex bg-slate-50 rounded mb-1 p-1 hover:bg-slate-300 shadow-md active:shadow"
-            onClick={() => { recipesManager.selectRecipe(recipe) }}
+            onClick={() => { 
+                modalManager.setModalContentType(ModalContentType.aboutDocument)
+                documentManager.selectDocument(recipe) }}
             onMouseOver={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
         >
@@ -19,7 +23,7 @@ export default function RecipeListItem({ ...props }) {
             </div>
 
             {
-                isHovering && <button className="!mr-0 !ml-auto btn btn-sky" onClick={(e) => { recipesManager.deleteDocument(recipe.id, e) }}>
+                isHovering && <button className="!mr-0 !ml-auto btn btn-sky" onClick={(e) => { documentManager.deleteDocument(recipe.id, e) }}>
                     <span>
                         <img src="images/bootstrapIcons/x-lg.svg"></img>
                     </span>

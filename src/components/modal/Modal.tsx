@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import modalManager from "../../functions/modalManager";
+import AboutDocument from "./AboutDocument";
 
 
-enum ModalContentType {
+export enum ModalContentType {
     noContent,
     aboutDocument,
 }
@@ -23,7 +24,7 @@ export default function Modal() {
                 onClick={(e) => { setIsShowing(false); e.stopPropagation(); console.log("a") }}>
                 {/*modal */}
                 <div className="justify-center items-center flex h-full" onClick={(e) => { e.stopPropagation(); console.log("aa") }}>
-                    <div className="bg-white p-2 rounded-xl h-1/3 w-1/2 flex flex-col border border-slate-400 shadow-xl">
+                    <div className="bg-white p-2 rounded-xl w-2/3 flex flex-col border border-slate-400 shadow-xl">
                         <div className="flex-1 h1">
                             Header
                             <button className="float-right btn btn-green" onClick={(e) => { setIsShowing(false); e.stopPropagation() }}>close</button>
@@ -36,13 +37,13 @@ export default function Modal() {
                                 contentType == ModalContentType.noContent && <div>nothing</div>
                             }
                             {
-                                contentType == ModalContentType.aboutDocument && <div>about</div>
+                                contentType == ModalContentType.aboutDocument && <AboutDocument/>
                             }
 
                         </div>
                         <div className="flex-1">
                             <hr></hr>
-                            Footer
+
                         </div>
 
                     </div>

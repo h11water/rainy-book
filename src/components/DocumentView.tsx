@@ -1,8 +1,8 @@
-import recipesManager from "../functions/recipesManager"
+import documentManager from "../functions/documentManager"
 import SectionAdder from "./SectionAdder";
 import IngredientsView from "./IngredientsView";
 import SectionView from "./SectionView";
-import { Recipe, Section, SectionType } from "../types/Recipe";
+import { Recipe, Section, SectionType } from "../types/Document";
 import { useState } from "react";
 import DrawingCanvas from "./DrawingCanvas";
 
@@ -26,13 +26,15 @@ export default function RecipeView({ ...props }) {
 
       {/* change the key so the full component refreshes and the animation gets replayed*/}
       <div className="fade-in overflow-y-auto overflow-x-hidden" key={selectedRecipe.id}>
+
+        {/*
         <button className="btn btn-sky" onClick={() => {
           setGridColumns(prev => {
             console.log(prev)
             return prev + 1
           })
         }}>increment grid</button>
-
+        */}
 
 
         <div className="grid" style={{ "gridTemplateColumns": "repeat(" + String(gridColumns) + ", minmax(0, 1fr))" }}>

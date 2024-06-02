@@ -1,4 +1,4 @@
-import recipesManager from "../functions/recipesManager";
+import documentManager from "../functions/documentManager";
 
 
 export default function () {
@@ -21,7 +21,7 @@ export default function () {
             <br></br>
             <div className="flex flex-col">
                 <button className="btn btn-sky"> clear localstorage</button>
-                <button className="btn btn-sky" onClick={()=>{recipesManager.resetDefaultRecipes()}}> get default recipes json</button>
+                <button className="btn btn-sky" onClick={()=>{documentManager.resetDefaultDocuement()}}> get default recipes json</button>
             </div>
 
 

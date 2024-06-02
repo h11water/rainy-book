@@ -8,7 +8,7 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { Recipe } from '../types/Recipe';
+import { Recipe } from '../types/Document';
 
 const theme = {
     // Theme styling goes here
@@ -67,7 +67,6 @@ export default function Editor({sectionOrder, initialContent, recipe, onChangeFn
                     contentEditable={<ContentEditable className='lex-content-editable h-full'/>}
                     placeholder={<div className='lex-init-placeholder text-slate-400'>Enter some text...</div>}
                     ErrorBoundary={LexicalErrorBoundary}
-                    
                 />
                 <HistoryPlugin />
                 <OnChangePlugin onChange={e=>{editorOnChange(e,onChangeFn)}}/>

@@ -1,9 +1,9 @@
 //import $ from "jquery";
 import { useState } from "react";
 import EditableContent from "./EditableContentView";
-import recipesManager from "../functions/recipesManager";
+import documentManager from "../functions/documentManager";
 import Editor from "./LexicalEditor";
-import { Section, SectionType } from "../types/Recipe";
+import { Section, SectionType } from "../types/Document";
 import { EditorState } from "lexical";
 import DrawingCanvas from "./DrawingCanvas";
 
@@ -31,7 +31,7 @@ export default function SectionView({ ...props }) {
         editedSection[sectionEditKey] = event.target.innerHTML;
 
         props.selectedRecipe.sections[props.sectionOrder]
-        recipesManager.editSection(props.selectedRecipe, props.sectionOrder, editedSection)
+        documentManager.editSection(props.selectedRecipe, props.sectionOrder, editedSection)
     }
 
     function saveLexiSection(lexiState: EditorState) {
@@ -41,11 +41,11 @@ export default function SectionView({ ...props }) {
         editedSection.lexiContent = lexiState;
 
         props.selectedRecipe.sections[props.sectionOrder]
-        recipesManager.editSection(props.selectedRecipe, props.sectionOrder, editedSection)
+        documentManager.editSection(props.selectedRecipe, props.sectionOrder, editedSection)
     }
 
     function handleDelete() {
-        recipesManager.deleteSection(props.selectedRecipe, props.sectionOrder)
+        documentManager.deleteSection(props.selectedRecipe, props.sectionOrder)
     }
 
     return (

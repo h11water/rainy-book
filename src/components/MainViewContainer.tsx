@@ -1,12 +1,12 @@
 import * as React from "react"
 import { useEffect } from 'react'
-import recipesManager from "../functions/recipesManager"
-import { Recipe } from "../types/Recipe";
+import documentManager from "../functions/documentManager"
+import { Recipe } from "../types/Document";
 import HeadrBar from "./HeaderBar";
 import { ViewType } from "../types/ViewType";
-import NoRecipe from "./NoRecipeView";
-import RecipeView from "./RecipeView";
-import NewRecipeView from "./NewRecipeView";
+import NoRecipe from "./NoDocumentView";
+import RecipeView from "./DocumentView";
+import NewRecipeView from "./NewDocumentView";
 import SettingsView from "./SettingsView";
 import Modal from "./modal/Modal";
 import modalManager from "../functions/modalManager";
@@ -20,15 +20,14 @@ export default function MainViewContainer() {
     // so it is called at initialisation
     useEffect(() => {
         //console.log(import.meta.env.test1,import.meta.env.VITE_ala)
-        recipesManager.setStateFunctions.setSelectedRecipe = setSelectedRecipe;
-        recipesManager.setStateFunctions.setViewingType = setViewingType;
+        documentManager.setStateFunctions.setSelectedRecipe = setSelectedRecipe;
+        documentManager.setStateFunctions.setViewingType = setViewingType;
 
 
-        return
-        let lastSelectedRecipe = recipesManager.recipesList.find((r: Recipe) => r.id == localStorage.getItem("lastSelected"))
+        let lastSelectedRecipe = documentManager.documentList.find((r: Recipe) => r.id == localStorage.getItem("lastSelected"))
         setSelectedRecipe(lastSelectedRecipe);
         /**/
-        recipesManager.setStateFunctions.setRecipesList((recipesList: Recipe[]) => {
+        documentManager.setStateFunctions.setRecipesList((recipesList: Recipe[]) => {
             let lastSelectedRecipe: any = recipesList.find(r => r.id == localStorage.getItem("lastSelected"))
             if (lastSelectedRecipe) {
                 setSelectedRecipe(lastSelectedRecipe);
@@ -48,7 +47,8 @@ export default function MainViewContainer() {
         <div className="flex-3 rounded-xl bg-slate-50 m-1 shadow border border-slate-400 w-64 p-2 overflow-hidden flex-col flex">
             <Modal></Modal>
             <HeadrBar HeaderContent={selectedRecipe?.name}></HeadrBar>
-            <div className="flex">
+            {/*
+                <div className="flex">
 
                 <button onClick={()=>{recipesManager.setStateFunctions.setViewingType(ViewType.noRecipe)}}>test </button>
 
@@ -65,6 +65,8 @@ export default function MainViewContainer() {
                 </button>
                 <button className="btn btn-sky flex-1" onClick={() => { modalManager.setModalIsOpen(true) }} > show modal</button>
             </div>
+            */}
+
 
 
             {

@@ -1,19 +1,18 @@
-import RecipesList from "../components/RecipeListView";
-import { Recipe, Section } from "../types/Recipe"
+import { Recipe, Section } from "../types/Document"
 import { ViewType } from "../types/ViewType";
 import { v4 as uuidv4 } from 'uuid';
 
-type RecipesManager = {
-  selectedRecipe: Recipe | undefined
-  recipesList: Recipe[]
+type DocumentManager = {
+  selectedDocument: Recipe | undefined
+  documentList: Recipe[]
   setStateFunctions: any
-  saveRecipesToLocalStorage: Function
-  resetDefaultRecipes: Function
-  populateRecipes: Function
-  addRecipe: Function
-  selectRecipe: Function
-  showRecipesList: Function
-  showNewRecipeView: Function
+  saveDocumentsToLocalStorage: Function
+  resetDefaultDocuement: Function
+  populateDocuments: Function
+  addDocument: Function
+  selectDocument: Function
+  showDocumentsList: Function
+  showNewDocumentView: Function
   addNewSectionTo: Function
   editSection: Function
   deleteSection: Function
@@ -21,9 +20,9 @@ type RecipesManager = {
 }
 
 
-let recipesManager: RecipesManager = {
-  selectedRecipe: undefined,
-  recipesList: [],
+let documentManager: DocumentManager = {
+  selectedDocument: undefined,
+  documentList: [],
   setStateFunctions: {
     setRecipeTitle: undefined,
     setMainImageUrl: undefined,
@@ -32,22 +31,22 @@ let recipesManager: RecipesManager = {
     setRecipesList: undefined,
     setViewingType: undefined
   },
-  saveRecipesToLocalStorage: function () {
+  saveDocumentsToLocalStorage: function () {
     this.setStateFunctions.setRecipesList((recipes: Recipe[]) => {
       //console.log(recipes)
       localStorage.setItem("recipes", JSON.stringify(recipes));
       return recipes;
     });
   },
-  resetDefaultRecipes: function () {
+  resetDefaultDocuement: function () {
     fetch(window.location.href + "recipes.json").then(e => e.json()).then(d => {
-      recipesManager.setStateFunctions.setRecipesList(() => {
+      documentManager.setStateFunctions.setRecipesList(() => {
         console.log(d.recipes);
         return d.recipes;
       });
     });
   },
-  populateRecipes: function (setRecipes: (a: any) => void) {
+  populateDocuments: function (setRecipes: (a: any) => void) {
     // empty the recipes list
     setRecipes([]);
 
@@ -60,17 +59,17 @@ let recipesManager: RecipesManager = {
       //console.log(JSON.parse(temp))
       return JSON.parse(temp);
     });
-    this.recipesList = JSON.parse(temp).recipes;
+    this.documentList = JSON.parse(temp).recipes;
     return JSON.parse(temp).recipes;
   },
-  addRecipe: function (newRecipe: Recipe) {
+  addDocument: function (newRecipe: Recipe) {
     this.setStateFunctions.setRecipesList((oldRecipes: Recipe[]) => {
       return [newRecipe, ...oldRecipes];
     });
-    this.saveRecipesToLocalStorage();
+    this.saveDocumentsToLocalStorage();
   },
-  selectRecipe: function (recipe: Recipe) {
-    this.selectedRecipe = recipe;
+  selectDocument: function (recipe: Recipe) {
+    this.selectedDocument = recipe;
     /*
     this.setStateFunctions.setRecipeTitle(recipe.name);
     this.setStateFunctions.setMainImageUrl(recipe.mainImage);
@@ -85,13 +84,13 @@ let recipesManager: RecipesManager = {
 
     // on mobile, close the recipe list
     if (window.screen.width < 600) {
-      this.showRecipesList();
+      this.showDocumentsList();
     }
 
     //return id
     return 0;
   },
-  showRecipesList: function () {
+  showDocumentsList: function () {
     let a = document.getElementById("recipe-list-container");
 
     if (a === null) return;
@@ -103,12 +102,12 @@ let recipesManager: RecipesManager = {
       a.style.display = "";
     }
   },
-  showNewRecipeView: function () {
+  showNewDocumentView: function () {
     this.setStateFunctions.setViewingType(ViewType.createRecipe);
 
     // on mobile close recipe list
     if (window.screen.width < 600) {
-      this.showRecipesList();
+      this.showDocumentsList();
     }
   },
   addNewSectionTo: function (recipe: Recipe, a: any) {
@@ -123,7 +122,7 @@ let recipesManager: RecipesManager = {
       }
     );
 
-    this.setStateFunctions.setSelectedRecipe((prev: Recipe) => {
+    this.setStateFunctions.setSelectedRecipe(() => {
 
       //must return a clone because otherwise
       //object.is will detect the object as the same
@@ -138,7 +137,7 @@ let recipesManager: RecipesManager = {
       prev = [recipe, ...prev];
       return prev;
     });
-    this.saveRecipesToLocalStorage();
+    this.saveDocumentsToLocalStorage();
     return
   },
   editSection: function (recipe: Recipe, sectionId: string, newSection: Section) {
@@ -158,7 +157,7 @@ let recipesManager: RecipesManager = {
 
       return prev;
     })
-    this.saveRecipesToLocalStorage();
+    this.saveDocumentsToLocalStorage();
     return;
   },
   deleteSection(recipe: Recipe, sectionId: string) {
@@ -176,7 +175,7 @@ let recipesManager: RecipesManager = {
 
       return JSON.parse(JSON.stringify(prev))
     })
-    this.saveRecipesToLocalStorage();
+    this.saveDocumentsToLocalStorage();
   },
   deleteDocument: function (documentId: string, event: any) {
     // stop click event propogating to parent
@@ -185,8 +184,8 @@ let recipesManager: RecipesManager = {
       this.setStateFunctions.setViewingType(ViewType.noRecipe)
       return prev.filter(r => r.id !== documentId);
     })
-    this.saveRecipesToLocalStorage()
+    this.saveDocumentsToLocalStorage()
   }
 }
 
-export default recipesManager
+export default documentManager

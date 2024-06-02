@@ -1,5 +1,5 @@
 import './App.css'
-import RecipesList from './components/RecipeListView'
+import DocumentList from './components/DocumentListView'
 import * as React from 'react';
 import MainViewContainer from './components/MainViewContainer';
 
@@ -13,7 +13,7 @@ function App() {
     <>
       <div className="bg-gray-200 w-full flex p-2 rounded flex-row h-screen" id='root'>
 
-        <RecipesList></RecipesList>
+        <DocumentList></DocumentList>
         <MainViewContainer></MainViewContainer>
 
       </div>
