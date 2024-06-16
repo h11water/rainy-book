@@ -1,7 +1,7 @@
 import * as React from "react"
 import { useEffect } from 'react'
 import documentManager from "../functions/documentManager"
-import { Recipe } from "../types/Document";
+import { MyDocument } from "../types/Document";
 import HeadrBar from "./HeaderBar";
 import { ViewType } from "../types/ViewType";
 import NoRecipe from "./NoDocumentView";
@@ -9,25 +9,27 @@ import RecipeView from "./DocumentView";
 import NewRecipeView from "./NewDocumentView";
 import SettingsView from "./SettingsView";
 import Modal from "./modal/Modal";
-import modalManager from "../functions/modalManager";
 
 
 export default function MainViewContainer() {
-    const [selectedRecipe, setSelectedRecipe] = React.useState<Recipe | undefined>();
+    const [selectedRecipe, setSelectedRecipe] = React.useState<MyDocument | undefined>();
+
+
     const [viewingType, setViewingType] = React.useState<ViewType>(ViewType.noRecipe);
     // use effect will be called if the 2nd param
     // in this case [], changes. [] does not change
     // so it is called at initialisation
+    /**/
     useEffect(() => {
         //console.log(import.meta.env.test1,import.meta.env.VITE_ala)
-        documentManager.setStateFunctions.setSelectedRecipe = setSelectedRecipe;
+        documentManager.setStateFunctions.setSelectedDocument = setSelectedRecipe;
         documentManager.setStateFunctions.setViewingType = setViewingType;
 
-
-        let lastSelectedRecipe = documentManager.documentList.find((r: Recipe) => r.id == localStorage.getItem("lastSelected"))
+        console.log(documentManager.documentList)
+        let lastSelectedRecipe = documentManager.documentList.find((r: MyDocument) => r.id == localStorage.getItem("lastSelected"))
         setSelectedRecipe(lastSelectedRecipe);
-        /**/
-        documentManager.setStateFunctions.setRecipesList((recipesList: Recipe[]) => {
+        return
+        documentManager.setStateFunctions.setRecipesList((recipesList: MyDocument[]) => {
             let lastSelectedRecipe: any = recipesList.find(r => r.id == localStorage.getItem("lastSelected"))
             if (lastSelectedRecipe) {
                 setSelectedRecipe(lastSelectedRecipe);
@@ -37,6 +39,7 @@ export default function MainViewContainer() {
         })
 
     }, [])
+    
 
     useEffect(() => {
     }, [selectedRecipe])

@@ -8,7 +8,7 @@ import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { OnChangePlugin } from '@lexical/react/LexicalOnChangePlugin';
 import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
-import { Recipe } from '../types/Document';
+import { MyDocument } from '../types/Document';
 
 const theme = {
     // Theme styling goes here
@@ -47,7 +47,7 @@ function editorOnChange(eState:EditorState, onChangeFn:Function):void{
 interface IProps{
     sectionOrder:number
     initialContent:string
-    recipe:Recipe
+    recipe:MyDocument
     onChangeFn: (eState:EditorState)=>void
 }
 

@@ -1,6 +1,6 @@
 import { EditorState } from "lexical"
 
-export type Recipe = {
+export type MyDocument = {
     id: string
     name: string
     description: string
@@ -24,6 +24,7 @@ export type Section = {
     type: SectionType
     content: string
     lexiContent: EditorState | undefined
+    canvasDataUrl: string | undefined
 }
 
 export enum SectionType{

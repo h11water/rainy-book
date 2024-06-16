@@ -1,4 +1,4 @@
-export default function NoRecipe({ ...props }) {
+export default function NoRecipe({}) {
 
     return (
         <div className="">

@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
 import * as React from "react"
 import RecipeListItem from './DocumentListItem'
-import { Recipe } from '../types/Document'
+import { MyDocument } from '../types/Document'
 import documentManager from '../functions/documentManager'
 import { ViewType } from '../types/ViewType'
 
 
 export default function DocumentList() {
-  const [recipes, setRecipes] = React.useState<Recipe[]>([])
+  const [recipes, setRecipes] = React.useState<MyDocument[]>([])
   useEffect(() => {
     documentManager.setStateFunctions.setRecipesList = setRecipes;
     documentManager.populateDocuments(setRecipes);

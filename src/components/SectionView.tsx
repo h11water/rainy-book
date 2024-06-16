@@ -73,7 +73,7 @@ export default function SectionView({ ...props }) {
                         props.sectionType === SectionType.text && <Editor sectionOrder={props.sectionOrder} initialContent={props.section.lexiContent} recipe={props.selectedRecipe} onChangeFn={saveLexiSection} />
                     }
                     {
-                        props.sectionType === SectionType.drawing && <DrawingCanvas section={props.section}></DrawingCanvas>
+                        props.sectionType === SectionType.drawing && <DrawingCanvas section={props.section} docId={props.selectedRecipe.id}></DrawingCanvas>
                     }
                     </div>
 

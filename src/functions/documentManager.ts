@@ -1,11 +1,18 @@
-import { Recipe, Section } from "../types/Document"
+import { MyDocument, Section } from "../types/Document"
 import { ViewType } from "../types/ViewType";
 import { v4 as uuidv4 } from 'uuid';
 
 type DocumentManager = {
-  selectedDocument: Recipe | undefined
-  documentList: Recipe[]
-  setStateFunctions: any
+  selectedDocument: MyDocument | undefined
+  documentList: MyDocument[]
+  setStateFunctions: {
+    setDocumentTitle: Function ,
+    setMainImageUrl: Function,
+    setDocumentSections: Function,
+    setSelectedDocument: Function ,
+    setRecipesList: Function,
+    setViewingType: Function
+  }
   saveDocumentsToLocalStorage: Function
   resetDefaultDocuement: Function
   populateDocuments: Function
@@ -24,15 +31,15 @@ let documentManager: DocumentManager = {
   selectedDocument: undefined,
   documentList: [],
   setStateFunctions: {
-    setRecipeTitle: undefined,
-    setMainImageUrl: undefined,
-    setRecipesections: undefined,
-    setSelectedRecipe: undefined,
-    setRecipesList: undefined,
-    setViewingType: undefined
+    setDocumentTitle: ()=>{},
+    setMainImageUrl: ()=>{},
+    setDocumentSections: ()=>{},
+    setSelectedDocument: ()=>{},
+    setRecipesList: ()=>{},
+    setViewingType: ()=>{}
   },
   saveDocumentsToLocalStorage: function () {
-    this.setStateFunctions.setRecipesList((recipes: Recipe[]) => {
+    this.setStateFunctions.setRecipesList((recipes: MyDocument[]) => {
       //console.log(recipes)
       localStorage.setItem("recipes", JSON.stringify(recipes));
       return recipes;
@@ -62,13 +69,13 @@ let documentManager: DocumentManager = {
     this.documentList = JSON.parse(temp).recipes;
     return JSON.parse(temp).recipes;
   },
-  addDocument: function (newRecipe: Recipe) {
-    this.setStateFunctions.setRecipesList((oldRecipes: Recipe[]) => {
+  addDocument: function (newRecipe: MyDocument) {
+    this.setStateFunctions.setRecipesList((oldRecipes: MyDocument[]) => {
       return [newRecipe, ...oldRecipes];
     });
     this.saveDocumentsToLocalStorage();
   },
-  selectDocument: function (recipe: Recipe) {
+  selectDocument: function (recipe: MyDocument) {
     this.selectedDocument = recipe;
     /*
     this.setStateFunctions.setRecipeTitle(recipe.name);
@@ -78,7 +85,7 @@ let documentManager: DocumentManager = {
     // stop showing the "create new recipe" view
     this.setStateFunctions.setViewingType(ViewType.hasRecipe);
 
-    this.setStateFunctions.setSelectedRecipe(recipe);
+    this.setStateFunctions.setSelectedDocument(recipe);
 
     localStorage.setItem("lastSelected", recipe.id);
 
@@ -110,7 +117,7 @@ let documentManager: DocumentManager = {
       this.showDocumentsList();
     }
   },
-  addNewSectionTo: function (recipe: Recipe, a: any) {
+  addNewSectionTo: function (recipe: MyDocument, a: any) {
 
     recipe.sections.push(
       {
@@ -118,11 +125,12 @@ let documentManager: DocumentManager = {
         header: "title" + recipe.sections.length,
         type: a,
         content: "text",
-        lexiContent: undefined
+        lexiContent: undefined,
+        canvasDataUrl: undefined
       }
     );
 
-    this.setStateFunctions.setSelectedRecipe(() => {
+    this.setStateFunctions.setSelectedDocument(() => {
 
       //must return a clone because otherwise
       //object.is will detect the object as the same
@@ -131,7 +139,7 @@ let documentManager: DocumentManager = {
       //return structuredClone(recipe);
       return JSON.parse(JSON.stringify(recipe));
     });
-    this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
+    this.setStateFunctions.setRecipesList((prev: MyDocument[]) => {
       //replace recipe with new recipe
       prev = prev.filter(r => r.id !== recipe.id);
       prev = [recipe, ...prev];
@@ -140,9 +148,9 @@ let documentManager: DocumentManager = {
     this.saveDocumentsToLocalStorage();
     return
   },
-  editSection: function (recipe: Recipe, sectionId: string, newSection: Section) {
+  editSection: function (recipe: MyDocument, sectionId: string, newSection: Section) {
 
-    this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
+    this.setStateFunctions.setRecipesList((prev: MyDocument[]) => {
       let editedRecipe = prev.find(p => p.id === recipe.id)
       if (!editedRecipe) return prev;
       // get index of edited recipe
@@ -160,9 +168,9 @@ let documentManager: DocumentManager = {
     this.saveDocumentsToLocalStorage();
     return;
   },
-  deleteSection(recipe: Recipe, sectionId: string) {
+  deleteSection(recipe: MyDocument, sectionId: string) {
     console.log(JSON.parse(JSON.stringify(recipe)))
-    this.setStateFunctions.setSelectedRecipe((prev: Recipe) => {
+    this.setStateFunctions.setSelectedDocument((prev: MyDocument) => {
       let sectionToDelete = prev.sections.find(section => section.sectionOrder === sectionId)
 
       // if section does not exist
@@ -180,7 +188,7 @@ let documentManager: DocumentManager = {
   deleteDocument: function (documentId: string, event: any) {
     // stop click event propogating to parent
     event.stopPropagation();
-    this.setStateFunctions.setRecipesList((prev: Recipe[]) => {
+    this.setStateFunctions.setRecipesList((prev: MyDocument[]) => {
       this.setStateFunctions.setViewingType(ViewType.noRecipe)
       return prev.filter(r => r.id !== documentId);
     })

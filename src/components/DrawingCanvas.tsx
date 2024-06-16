@@ -1,20 +1,39 @@
 import * as React from "react"
-import { Section } from "../types/Document";
+import { MyDocument, Section } from "../types/Document";
+import documentManager from "../functions/documentManager";
 
 let mouseRelativePos = [0, 0];
 
-interface myProps{
-    section:Section
+interface myProps {
+    section: Section
+    docId: string
 }
+const canvasElemRef = React.createRef<HTMLCanvasElement>()
 
-export default function DrawingCanvas({section}:myProps) {
+export default function DrawingCanvas({ section, docId }: myProps) {
 
-    const canvasElem = React.createRef<HTMLCanvasElement>()
+    // load the image if it exists
+    React.useEffect(() => {
+        if (section.canvasDataUrl == undefined || canvasElemRef.current == null) return;
+
+        let canvasElem = canvasElemRef.current;
+        const context = canvasElem.getContext('2d');
+        if (context == undefined) return;
+
+        const image = new Image();
+        image.src = section.canvasDataUrl;
+        image.onload = () => {
+            context.drawImage(image, 0, 0, canvasElem.width, canvasElem.height);
+        };
+
+
+    }, [])
+
     //console.log(section)
-    
+
 
     function handleOnClick(event: any) {
-        if (!canvasElem || !canvasElem.current) return
+        if (!canvasElemRef || !canvasElemRef.current) return
 
         //console.log(canvasElem.current.getContext, canvasElem, canvasElem.current.getBoundingClientRect(), event)
 
@@ -35,15 +54,15 @@ export default function DrawingCanvas({section}:myProps) {
 
     }
 
-    function getRelativeMousePos(event:any){
-        
+    function getRelativeMousePos(event: any) {
+
         //get the mouse position relative to the canvas
         let temp = event.target.getBoundingClientRect();
         let mouseRelativePos = [
             event.clientX - temp.left,
             event.clientY - temp.top
         ];
-       
+
         return mouseRelativePos;
     }
 
@@ -70,11 +89,38 @@ export default function DrawingCanvas({section}:myProps) {
     function handleMouseUp(event: any) {
         var ctx = event.target.getContext("2d");
         ctx.stroke();
+        console.log("mouse up")
+        let selectedDocument: MyDocument;
+        documentManager.setStateFunctions.setSelectedDocument((prev: MyDocument) => {
+            selectedDocument = prev;
+
+            return selectedDocument
+        })
+
+        documentManager.setStateFunctions.setRecipesList((oldList: MyDocument[]) => {
+            /*
+            // find the index of the document
+            let selectedDoc = oldList.find(e=>e.id===docId);
+            if(selectedDoc == undefined) return oldList;
+            let selectedDocIndex = oldList.indexOf(selectedDoc);
+            let sectionIndex = oldList[selectedDocIndex].sections.indexOf(section)
+            console.log(selectedDoc, selectedDocIndex, sectionIndex, section.sectionOrder)
+            oldList[selectedDocIndex].sections[sectionIndex].canvasDataUrl = event.target.toDataURL()
+            */
+            let a = selectedDocument.sections.find(section => section.sectionOrder === section.sectionOrder)
+            if (!a) {
+                console.log("selected doc not found")
+                return;
+            }
+            a.canvasDataUrl = event.target.toDataURL()
+            return oldList;
+        })
+        documentManager.saveDocumentsToLocalStorage()
     }
 
     return (
         <div>
-            <canvas ref={canvasElem} className=" p-1 m-1 shadow" width={400} height={400} onClick={handleOnClick}  onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
+            <canvas ref={canvasElemRef} className=" p-1 m-1 shadow" width={400} height={400} onClick={handleOnClick} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
             </canvas>
         </div>)
 }

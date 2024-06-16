@@ -18,7 +18,7 @@ export default function IngredientsView() {
                     <div className="inline">Add ingredient</div>
                 </div>
 
-                <div className="flex hidden">
+                <div className="flex">
                     <div className="flex-4 m-1">
                         <label htmlFor="ingredient-name" >ingredient name</label>
                     </div>

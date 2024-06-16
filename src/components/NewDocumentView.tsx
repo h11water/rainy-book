@@ -1,10 +1,10 @@
 import documentManager from "../functions/documentManager"
-import { Recipe } from "../types/Document"
+import { MyDocument } from "../types/Document"
 import { v4 as uuidv4 } from 'uuid';
 
 export default function NewRecipeView() {
 
-    function createRecipe(e: any): Recipe {
+    function createRecipe(e: any): MyDocument {
         e.preventDefault()
         // template recipe
         let newRecipe = {

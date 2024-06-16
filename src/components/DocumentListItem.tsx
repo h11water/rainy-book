@@ -1,12 +1,17 @@
+/*
+This is a component for a single list item 
+within the document list. 
+*/
+
 //import Recipe from "../types/Recipe"
 import { useState } from "react";
 import documentManager from "../functions/documentManager";
-import { Recipe } from "../types/Document";
+import { MyDocument } from "../types/Document";
 import modalManager from "../functions/modalManager";
 import { ModalContentType } from "./modal/Modal";
 
 export default function RecipeListItem({ ...props }) {
-    let recipe: Recipe = props.recipe;
+    let recipe: MyDocument = props.recipe;
     const [isHovering, setIsHovering] = useState(false)
 
     return (

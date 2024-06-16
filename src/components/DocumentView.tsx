@@ -2,12 +2,12 @@ import documentManager from "../functions/documentManager"
 import SectionAdder from "./SectionAdder";
 import IngredientsView from "./IngredientsView";
 import SectionView from "./SectionView";
-import { Recipe, Section, SectionType } from "../types/Document";
+import { MyDocument, Section, SectionType } from "../types/Document";
 import { useState } from "react";
 import DrawingCanvas from "./DrawingCanvas";
 
 export default function RecipeView({ ...props }) {
-  var selectedRecipe: Recipe
+  var selectedRecipe: MyDocument
   try {
     selectedRecipe = props.recipe;
     //this code will give undefined access error if sections does not exist
